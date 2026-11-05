@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="sq"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TIRANA – ANALIZA TOPOGRAFIKE</title>
+<style>
+:root{--bg:#f1eee3;--pn:#fbf9f2;--tx:#1d2b26;--mu:#5d6b64;--ac:#b5701a;--ln:#d5cfbb;--w:#2a7fb5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e1c19;--pn:#16282399;--tx:#e8e4d6;--mu:#9fb0a7;--ac:#e0a03a;--ln:#2c443d;--w:#59b3e6}}
+*,*:before,*:after{box-sizing:inherit}html{scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;margin:0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--ln)}
+nav button{flex:none;border:1px solid var(--ln);background:var(--pn);color:var(--tx);padding:7px 12px;border-radius:6px;font:inherit;cursor:pointer;transition:.2s}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.main{display:grid;grid-template-columns:1fr 360px;gap:0}
+#vw{position:relative;height:calc(100vh - 56px);min-height:460px;background:#0d1a17;overflow:hidden;touch-action:none;cursor:grab}
+#vw canvas{display:block;width:100%;height:100%}
+#hero{position:absolute;left:16px;top:16px;max-width:min(420px,80%);background:#0d1a17cc;color:#efe9d6;padding:18px 20px;border-left:4px solid #e0a03a;transition:opacity .5s}
+#hero h1{font-size:clamp(24px,4vw,40px);line-height:1.05}#hero p{margin:8px 0 12px;color:#c9d3cb;font-size:14px}
+#hero button,.bt{background:#e0a03a;border:0;color:#1d1405;padding:8px 14px;border-radius:5px;font:inherit;font-weight:600;cursor:pointer}
+#comp{position:absolute;right:14px;top:14px;width:54px;height:54px;color:#efe9d6;pointer-events:none}
+#sc{position:absolute;left:16px;bottom:14px;color:#efe9d6;font-size:12px;pointer-events:none}
+#sc i{display:block;height:6px;border:2px solid #efe9d6;border-top:0;margin-bottom:3px}
+#co{position:absolute;right:14px;bottom:12px;color:#efe9d6bb;font-size:12px;text-align:right;pointer-events:none}
+#vt{position:absolute;right:14px;top:78px;display:flex;flex-direction:column;gap:6px}
+#vt button{background:#0d1a17cc;color:#efe9d6;border:1px solid #efe9d655;border-radius:5px;padding:6px 10px;font:inherit;cursor:pointer}
+#vt button.on{background:#e0a03a;color:#1d1405}
+aside{padding:18px;background:var(--pn);border-left:1px solid var(--ln);overflow-y:auto;max-height:calc(100vh - 56px)}
+aside h2{font-size:22px;margin-bottom:6px}aside h3{font-size:15px;margin:14px 0 4px;color:var(--ac)}
+aside p{margin:0 0 6px;font-size:14px}
+.lay label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
+.lg div{display:flex;align-items:center;gap:8px;font-size:13px;padding:1px 0}.lg b{width:26px;height:12px;border-radius:2px;border:1px solid #0003;flex:none}
+#rd{background:var(--bg);border:1px dashed var(--ac);padding:10px;border-radius:6px;font-size:13px;min-height:84px}
+.note{background:var(--bg);border-left:3px solid var(--ac);padding:8px 10px;font-size:12.5px;color:var(--mu);margin-top:12px}
+section{max-width:1100px;margin:0 auto;padding:34px 18px}
+section h2{font-size:28px;margin-bottom:12px}
+#pf{width:100%;height:240px;background:var(--pn);border:1px solid var(--ln);border-radius:6px;display:block}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.facts div{background:var(--pn);border:1px solid var(--ln);padding:12px;border-radius:6px}.facts b{display:block;font-family:Georgia,serif;font-size:20px;color:var(--ac)}
+footer{background:#10201d;color:#efe9d6;text-align:center;padding:34px 16px;font-family:Georgia,serif}footer strong{display:block;font-size:24px;letter-spacing:.06em;margin-top:10px;color:#e0a03a}
+@media(max-width:820px){.main{grid-template-columns:1fr}#vw{height:62vh;min-height:360px}aside{max-height:none;border-left:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<nav id="nav"></nav>
+<div class="main">
+<div id="vw">
+ <div id="hero"><h1>TIRANA – ANALIZA TOPOGRAFIKE</h1><p>Shtatë harta mbi të njëjtin terren. Rrotullo me maus ose gisht, zmadho, kliko mbi relief për lartësi dhe pjerrësi.</p><button id="go">Hap hartat</button></div>
+ <svg id="comp" viewBox="-30 -30 60 60"><g id="ar"><circle r="26" fill="#0d1a17aa" stroke="#efe9d6" stroke-width="1.5"/><path d="M0-22 7 6 0 1-7 6Z" fill="#e0a03a"/><text y="-9" x="0" font-size="0" fill="none"></text><text x="0" y="20" text-anchor="middle" font-size="11" fill="#efe9d6" font-family="Georgia">V</text></g></svg>
+ <div id="vt"><button id="b2">2D</button><button id="b3" class="on">3D</button></div>
+ <div id="sc"><i id="sb"></i>5 km (shkallë grafike)</div>
+ <div id="co">41°19′39″ V, 19°49′07″ L (41.3275, 19.8187)<br>Qendra e Tiranës</div>
+</div>
+<aside>
+ <h2 id="mt"></h2>
+ <h3>Çfarë paraqet</h3><p id="m1"></p>
+ <h3>Pse përdoret</h3><p id="m2"></p>
+ <h3>Shembull nga Tirana</h3><p id="m3"></p>
+ <h3>Legjenda</h3><div class="lg" id="lg"></div>
+ <h3>Shtresat</h3>
+ <div class="lay">
+  <label><input type="checkbox" id="l_shade" checked> Hijëzim i relievit</label>
+  <label><input type="checkbox" id="l_cont"> Vija nivelit (100 m)</label>
+  <label><input type="checkbox" id="l_riv"> Rrjeti ujor (skematik)</label>
+  <label><input type="checkbox" id="l_lab" checked> Toponime dhe kuota</label>
+  <label>Zmadhimi vertikal <input type="range" id="ex" min="1" max="4" step=".1" value="1.6" style="flex:1"></label>
+ </div>
+ <h3>Pika e zgjedhur</h3><div id="rd">Kliko mbi hartë për të parë lartësinë, pjerrësinë dhe orientimin.</div>
+ <div class="note"><b>Rëndësishme:</b> relievi këtu është një <b>model ilustrues</b> i ndërtuar nga forma e përafërt e terrenit, jo matje reale DEM. Faktet e njohura janë vetëm: koordinatat e Tiranës, maja e Dajtit (~1 613 m), qendra e qytetit (~110 m) dhe pozicioni i përafërt i Lanës, lumit të Tiranës dhe liqenit artificial. Për analizë të saktë përdor DEM real (SRTM, Copernicus GLO-30).</div>
+</aside></div>
+<section><h2>Profili tërthor: qendra e Tiranës → Mali i Dajtit</h2>
+<canvas id="pf"></canvas><p style="color:var(--mu);font-size:13px">Prerje e modelit ilustrues përgjatë vijës nga qendra (0 km) drejt majës së Dajtit, rreth 10.5 km larg. Forma tregon kalimin nga ultësira te kodrat dhe pastaj te shpati malor.</p></section>
+<section><h2>Informacione gjeografike</h2>
+<div class="facts"><div><b>41.3275° V, 19.8187° L</b>Koordinatat e Tiranës</div><div><b>~110 m</b>Lartësia e përafërt e qendrës</div><div><b>~1 613 m</b>Maja e Dajtit</div><div><b>Veri lart</b>Orientimi në 2D; shigjeta rrotullohet në 3D</div></div></section>
+<section><h2>Pse kanë rëndësi hartat topografike për Tiranën</h2>
+<p>Tirana shtrihet në një ultësirë të mbrojtur nga kodra në jug e perëndim dhe nga masivi i Dajtit në lindje. Hartat topografike e bëjnë këtë formë të lexueshme: izohipset tregojnë ku ndryshon terreni, pjerrësia ku ndërtimi është i vështirë ose rrezikon rrëshqitje, ekspozicioni ku bien diell dhe erë, rrjeti hidrografik ku grumbullohet uji dhe ku ka rrezik përmbytjeje. Së bashku ato mbështesin planifikimin urban, mbrojtjen e mjedisit, menaxhimin e ujit dhe parandalimin e rreziqeve.</p></section>
+<footer>Hartat topografike të Tiranës<strong>PUNOI: ENEO KAZIU</strong></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),X0=-6,Y1=12,S=20,W=1024,CX=4,CY=2,PK=[9.5,4.6],TT=.35;
+function H(x,y){const p=x-PK[0],q=y-PK[1],c=Math.cos(TT),s=Math.sin(TT),a=p*c-q*s,l=p*s+q*c;
+ const e=1345*Math.exp(-(a*a/13.5+l*l/98))+120*Math.exp(-(p*p+q*q)/2)+380*Math.exp(-((x-3)**2/32+(y+5)**2/8)),w=Math.min(1,e/150);
+ return Math.max(30,110+4*x+e+w*(60*Math.sin(1.9*x+.8*y)*Math.sin(1.1*y-.6*x)+30*Math.sin(4.1*x-2.3*y)))}
+const hg=new Float32Array(W*W),sl=new Float32Array(W*W),as=new Float32Array(W*W),hs=new Float32Array(W*W);
+for(let j=0;j<W;j++)for(let i=0;i<W;i++)hg[j*W+i]=H(X0+(i+.5)/W*S,Y1-(j+.5)/W*S);
+const cell=S/W*1000;
+for(let j=0;j<W;j++)for(let i=0;i<W;i++){const k=j*W+i,i0=Math.max(i-1,0),i1=Math.min(i+1,W-1),j0=Math.max(j-1,0),j1=Math.min(j+1,W-1);
+ const gx=(hg[j*W+i1]-hg[j*W+i0])/((i1-i0)*cell),gy=-(hg[j1*W+i]-hg[j0*W+i])/((j1-j0)*cell);
+ sl[k]=Math.atan(Math.hypot(gx,gy))*57.2958;as[k]=(Math.atan2(-gx,-gy)*57.2958+360)%360;
+ const n=Math.hypot(gx*1.8,gy*1.8,1);hs[k]=(-gx*1.8*-.55+-gy*1.8*.55+.63)/n}
+const hx=c=>[parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)];
+const HY=[[100,'#3d8b4a','< 100 m'],[200,'#7bb661','100–200 m'],[400,'#c5d46a','200–400 m'],[700,'#f0d65a','400–700 m'],[1000,'#d9a95b','700–1000 m'],[1300,'#b07a43','1000–1300 m'],[1e9,'#7c5230','> 1300 m']];
+const PH=[[0,'#4f9a52'],[200,'#9bc46a'],[500,'#cdb86a'],[900,'#a98458'],[1300,'#8b7767'],[1650,'#e0dcd2']];
+const SLc=[[5,'#7fc77a','< 5° (e butë)'],[15,'#f3e27a','5–15° (mesatare)'],[30,'#f09a4a','15–30° (e madhe)'],[91,'#c03a2e','> 30° (shumë e madhe)']];
+const ASc=[['#4a7fd1','Veri (315°–45°)'],['#e2b84a','Lindje (45°–135°)'],['#d9533f','Jug (135°–225°)'],['#6aa86a','Perëndim (225°–315°)'],['#bbbbbb','Pothuajse e rrafshët (< 2°)']];
+const phc=h=>{let i=0;while(i<PH.length-2&&h>PH[i+1][0])i++;const t=Math.min(1,Math.max(0,(h-PH[i][0])/(PH[i+1][0]-PH[i][0]))),a=hx(PH[i][1]),b=hx(PH[i+1][1]);return a.map((v,n)=>v+(b[n]-v)*t)};
+const M={
+ fiz:{t:'A. Harta fiziko-topografike',a:'Relievi sipas lartësisë dhe formës: ultësirë, kodra, mal.',b:'Jep pamjen e përgjithshme të terrenit para analizave më të detajuara.',c:'Fusha e Tiranës (rreth 100–150 m), kodrat në jug dhe masivi i Dajtit në lindje.',lg:[['#4f9a52','Fushë (< 200 m)'],['#cdb86a','Kodrinë (200–600 m)'],['#a98458','Mal (> 600 m)'],['#e0dcd2','Maja të larta']]},
+ hip:{t:'B. Harta hipsometrike',a:'Lartësia mbi nivelin e detit me shkallë ngjyrash.',b:'Krahason shpejt zona të ulëta dhe të larta dhe lexon intervalet e lartësisë.',c:'E gjelbër në ultësirë, e verdhë në kodra, e kafe drejt majës së Dajtit.',lg:HY.map(x=>[x[1],x[2]])},
+ niv:{t:'C. Harta e vijave të nivelit',a:'Izohipse: vija që bashkojnë pika me të njëjtën lartësi. Hapi është 100 m, vijat e trasha çdo 500 m me kuota.',b:'Vijat afër njëra-tjetrës tregojnë shpat të pjerrët, ato larg njëra-tjetrës terren të butë.',c:'Vija të rralla në fushë, të dendura në shpatin perëndimor të Dajtit.',lg:[['#8a5a2b','Izohipsë çdo 100 m'],['#4a2a10','Izohipsë kryesore çdo 500 m (me kuotë)']]},
+ pje:{t:'D. Harta e pjerrësisë',a:'Këndi i prirjes së terrenit në gradë.',b:'Ndihmon në vlerësimin e ndërtueshmërisë, erozionit dhe rrezikut nga rrëshqitjet.',c:'Fusha e Tiranës është pothuajse e rrafshët, ndërsa shpatet e Dajtit kalojnë shpesh 30°.',lg:SLc.map(x=>[x[1],x[2]])},
+ eks:{t:'E. Harta e ekspozicionit të shpateve',a:'Drejtimi nga i cili është i kthyer çdo shpat.',b:'Ndikon në diellëzimin, ngrohjen, lagështirën dhe bimësinë.',c:'Shpatet perëndimore të Dajtit janë të kthyera nga Tirana, ato jugore marrin më shumë diell.',lg:ASc.map(x=>[x[0],x[1]])},
+ hid:{t:'F. Harta e rrjetit hidrografik',a:'Lana, lumi i Tiranës dhe liqeni artificial. Trasetë janë skematike dhe me pozicion të përafërt, jo hidrografi e matur.',b:'Tregon drejtimin e ujit, pellgjet dhe zonat e ndjeshme ndaj përmbytjeve.',c:'Lana kalon nëpër qytet dhe bashkohet me lumin e Tiranës drejt veriperëndimit.',lg:[['#2a7fb5','Lumë (skematik)'],['#6cb8e6','Liqen artificial (i përafërt)']]},
+ rel:{t:'G. Harta e relievit 3D',a:'Modeli tredimensional i terrenit me hije natyrale. Rrotullo, zmadho dhe ndrysho zmadhimin vertikal.',b:'Jep ndjesinë reale të formës: ultësirë e mbyllur nga kodra dhe nga muri i Dajtit.',c:'Shiko ultësirën e Tiranës nga jugperëndimi, me Dajtin në plan të parë.',lg:[['#4f9a52','Ultësirë'],['#cdb86a','Kodra'],['#a98458','Shpate malore'],['#e0dcd2','Maja']]}};
+const keys=Object.keys(M),L={shade:1,cont:0,riv:0,lab:1};let mode='fiz';
+const cv=document.createElement('canvas');cv.width=cv.height=W;const cx=cv.getContext('2d'),px=(x,y)=>[(x-X0)/S*W,(Y1-y)/S*W];
+function paint(){const im=cx.createImageData(W,W),d=im.data,lb=[],cm=mode=='niv'||L.cont;
+ for(let k=0;k<W*W;k++){const h=hg[k],i=k%W;let c;
+  if(mode=='fiz'||mode=='rel')c=phc(h);
+  else if(mode=='hip'){let n=0;while(h>HY[n][0])n++;c=hx(HY[n][1])}
+  else if(mode=='pje'){let n=0;while(sl[k]>SLc[n][0])n++;c=hx(SLc[n][1])}
+  else if(mode=='eks'){const a=as[k];c=hx(sl[k]<2?ASc[4][0]:a>=315||a<45?ASc[0][0]:a<135?ASc[1][0]:a<225?ASc[2][0]:ASc[3][0])}
+  else c=mode=='niv'?[238,232,213]:[226,224,214];
+  const f=L.shade?Math.min(1.25,Math.max(.5,.55+.55*hs[k]))*(mode=='niv'?.15:1)+(mode=='niv'?.85:0):1;
+  let r=c[0]*f,g=c[1]*f,b=c[2]*f;
+  if(cm&&i<W-1&&k<W*(W-1)){const a=Math.floor(h/100),r1=Math.floor(hg[k+1]/100),d1=Math.floor(hg[k+W]/100);
+   if(a!=r1||a!=d1){const lv=Math.max(a,a!=r1?r1:d1)*100,ix=lv%500==0;
+    if(ix){r=74;g=42;b=16;if(((k*2654435761)>>>0)%2600==0)lb.push([i,Math.floor(k/W),lv])}else{r=138;g=90;b=43}}}
+  d[k*4]=r;d[k*4+1]=g;d[k*4+2]=b;d[k*4+3]=255}
+ cx.putImageData(im,0,0);
+ if(L.riv||mode=='hid'){const R=[[[6,1.2],[4,.9],[2,.2],[.3,.4],[-1,1.3],[-2,3]],[[9,3.4],[6,3],[3,2.6],[0,3.2],[-2,3.1],[-4,4.2],[-6,5.2]]];
+  cx.strokeStyle='#2a7fb5';cx.lineWidth=mode=='hid'?5:3;cx.lineJoin='round';
+  R.forEach(p=>{cx.beginPath();p.forEach((q,n)=>{const[a,b]=px(...q);n?cx.lineTo(a,b):cx.moveTo(a,b)});cx.stroke()});
+  const[a,b]=px(-.3,-2.6);cx.fillStyle='#6cb8e6';cx.strokeStyle='#2a7fb5';cx.lineWidth=2;cx.beginPath();cx.ellipse(a,b,16,22,.3,0,7);cx.fill();cx.stroke()}
+ cx.font='bold 15px Georgia,serif';cx.textAlign='left';
+ const tx=(t,a,b,col)=>{cx.lineWidth=4;cx.strokeStyle='#ffffffcc';cx.strokeText(t,a,b);cx.fillStyle=col||'#1d2b26';cx.fillText(t,a,b)};
+ lb.forEach(q=>{cx.font='11px Georgia,serif';tx(q[2]+'',q[0],q[1],'#4a2a10')});
+ if(L.lab){cx.font='bold 16px Georgia,serif';[[0,0,'Qendra e Tiranës'],[PK[0],PK[1],'▲ Dajti 1 613 m'],[-.3,-2.6,'Liqeni artificial'],[2,.5,'Lana'],[-3.4,4.0,'Lumi i Tiranës']].forEach(p=>{const[a,b]=px(p[0],p[1]);if(p[2][0]!='L'&&p[2]!='Liqeni artificial'||L.riv||mode=='hid'){if(p[2]=='Qendra e Tiranës'){cx.fillStyle='#c0392b';cx.beginPath();cx.arc(a,b,6,0,7);cx.fill()}tx(p[2],a+9,b-6)}})}
+ tex.needsUpdate=true}
+const tex=new THREE.CanvasTexture(cv);tex.anisotropy=8;
+const vw=$('#vw'),ren=new THREE.WebGLRenderer({antialias:true});vw.insertBefore(ren.domElement,vw.firstChild);
+const sc=new THREE.Scene();sc.background=new THREE.Color(0x0d1a17);
+const cam=new THREE.PerspectiveCamera(40,1,.1,200);
+const geo=new THREE.PlaneGeometry(S,S,191,191);geo.rotateX(-Math.PI/2);
+const pa=geo.attributes.position,hv=new Float32Array(pa.count);
+for(let n=0;n<pa.count;n++)hv[n]=H(pa.getX(n)+CX,-pa.getZ(n)+CY);
+let ex=1.6;function setEx(){for(let n=0;n<pa.count;n++)pa.setY(n,hv[n]/1000*ex);pa.needsUpdate=true}setEx();
+const mesh=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({map:tex}));sc.add(mesh);
+const mk=new THREE.Mesh(new THREE.ConeGeometry(.12,.45,12),new THREE.MeshBasicMaterial({color:0xe0a03a}));mk.visible=false;sc.add(mk);
+const st={th:.5,ph:1,r:17},tg={th:.5,ph:1,r:17};
+function size(){const w=vw.clientWidth,h=vw.clientHeight;ren.setSize(w,h);ren.setPixelRatio(Math.min(devicePixelRatio,2));cam.aspect=w/h;cam.updateProjectionMatrix()}
+new ResizeObserver(size).observe(vw);
+function frame(){for(const k in st)st[k]+=(tg[k]-st[k])*.12;
+ const tgt=new THREE.Vector3(0,.3,0);cam.position.set(Math.sin(st.ph)*Math.sin(st.th),Math.cos(st.ph),Math.sin(st.ph)*Math.cos(st.th)).multiplyScalar(st.r).add(tgt);cam.lookAt(tgt);
+ ren.render(sc,cam);$('#ar').setAttribute('transform','rotate('+(st.th*57.2958)+')');
+ $('#sb').style.width=(5/(2*st.r*Math.tan(.35))*vw.clientHeight)+'px';requestAnimationFrame(frame)}
+const ps=new Map();let dn=null,pd=0;
+vw.addEventListener('pointerdown',e=>{vw.setPointerCapture(e.pointerId);ps.set(e.pointerId,[e.clientX,e.clientY]);dn=[e.clientX,e.clientY];pd=0;if(ps.size==2){const[a,b]=[...ps.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1])}});
+vw.addEventListener('pointermove',e=>{if(!ps.has(e.pointerId))return;const o=ps.get(e.pointerId);ps.set(e.pointerId,[e.clientX,e.clientY]);
+ if(ps.size==1){tg.th-=(e.clientX-o[0])*.006;tg.ph=Math.min(1.45,Math.max(.001,tg.ph-(e.clientY-o[1])*.005));$('#b2').classList.toggle('on',tg.ph<.05);$('#b3').classList.toggle('on',tg.ph>=.05)}
+ else if(ps.size==2){const[a,b]=[...ps.values()],n=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd)tg.r=Math.min(32,Math.max(4,tg.r*pd/n));pd=n}});
+vw.addEventListener('pointerup',e=>{ps.delete(e.pointerId);if(dn&&Math.hypot(e.clientX-dn[0],e.clientY-dn[1])<5&&ps.size==0)pick(e);dn=null});
+vw.addEventListener('wheel',e=>{e.preventDefault();tg.r=Math.min(32,Math.max(4,tg.r*Math.exp(e.deltaY*.001)))},{passive:false});
+const rc=new THREE.Raycaster();
+function pick(e){const r=vw.getBoundingClientRect();rc.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),cam);
+ const h=rc.intersectObject(mesh)[0];if(!h)return;const i=Math.min(W-1,Math.floor(h.uv.x*W)),j=Math.min(W-1,Math.floor((1-h.uv.y)*W)),k=j*W+i;
+ const E=X0+(i+.5)/W*S,N=Y1-(j+.5)/W*S,z=hg[k],a=as[k],s=sl[k],lat=41.3275+N/111.2,lon=19.8187+E/(111.32*Math.cos(lat*.01745));
+ const o=a>=337.5||a<22.5?'veri':a<67.5?'verilindje':a<112.5?'lindje':a<157.5?'juglindje':a<202.5?'jug':a<247.5?'jugperëndim':a<292.5?'perëndim':'veriperëndim';
+ $('#rd').innerHTML='<b>'+(z<150?'Zonë fushore':z<500?'Zonë kodrinore':'Zonë malore')+'</b><br>Lartësia (model): ~'+Math.round(z)+' m<br>Pjerrësia: '+s.toFixed(1)+'°<br>Orientimi: '+(s<2?'pothuajse i rrafshët':o+' ('+Math.round(a)+'°)')+'<br>Koordinata të përafërta: '+lat.toFixed(4)+'° V, '+lon.toFixed(4)+'° L<br><i>Vlera nga modeli ilustrues.</i>';
+ mk.position.copy(h.point).add(new THREE.Vector3(0,.22,0));mk.rotation.x=Math.PI;mk.visible=true}
+function setMode(m){mode=m;const o=M[m];$('#mt').textContent=o.t;$('#m1').textContent=o.a;$('#m2').textContent=o.b;$('#m3').textContent=o.c;
+ $('#lg').innerHTML=o.lg.map(x=>'<div><b style="background:'+x[0]+'"></b>'+x[1]+'</div>').join('');
+ if(m=='niv'){L.cont=1;$('#l_cont').checked=true}if(m=='hid'){L.riv=1;$('#l_riv').checked=true}
+ if(m=='rel'){ex=2.8;$('#ex').value=2.8;setEx();tg.ph=1.05}
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.k==m));paint()}
+const nav=$('#nav');keys.forEach(k=>{const b=document.createElement('button');b.dataset.k=k;b.textContent=M[k].t.replace(/^[A-G]\. (Harta (e |fiziko-)?)?/,'$&').slice(0,40);b.onclick=()=>setMode(k);nav.appendChild(b)});
+[['shade','l_shade'],['cont','l_cont'],['riv','l_riv'],['lab','l_lab']].forEach(([k,id])=>$('#'+id).onchange=e=>{L[k]=e.target.checked?1:0;paint()});
+$('#ex').oninput=e=>{ex=+e.target.value;setEx()};
+$('#b2').onclick=()=>{tg.ph=.001;$('#b2').classList.add('on');$('#b3').classList.remove('on')};
+$('#b3').onclick=()=>{tg.ph=1.05;$('#b2').classList.remove('on');$('#b3').classList.add('on')};
+$('#go').onclick=()=>{$('#hero').style.opacity=0;setTimeout(()=>$('#hero').style.display='none',500)};
+const pf=$('#pf');function prof(){const w=pf.width=pf.clientWidth*2,h=pf.height=480,c=pf.getContext('2d'),n=160,D=Math.hypot(PK[0],PK[1]),v=[];
+ for(let i=0;i<=n;i++)v.push(H(PK[0]*i/n,PK[1]*i/n));const mx=1700,l=70,b=50,t=20,r=20,X=i=>l+i/n*(w-l-r),Y=z=>h-b-z/mx*(h-b-t);
+ const tx=getComputedStyle(document.body).color;c.font='22px system-ui';c.fillStyle=tx;c.strokeStyle='#8884';
+ [0,500,1000,1500].forEach(z=>{c.beginPath();c.moveTo(l,Y(z));c.lineTo(w-r,Y(z));c.stroke();c.fillText(z+' m',4,Y(z)+7)});
+ [0,2,4,6,8,10].forEach(k=>c.fillText(k+' km',X(k/D*n)-18,h-18));
+ c.beginPath();c.moveTo(X(0),Y(0));v.forEach((z,i)=>c.lineTo(X(i),Y(z)));c.lineTo(X(n),Y(0));c.closePath();const g=c.createLinearGradient(0,Y(1600),0,Y(0));g.addColorStop(0,'#a98458');g.addColorStop(.5,'#cdb86a');g.addColorStop(1,'#4f9a52');c.fillStyle=g;c.fill();c.strokeStyle='#5b3d1d';c.lineWidth=3;c.stroke();
+ c.fillStyle=tx;c.fillText('Qendra e Tiranës',X(0)+8,Y(v[0])-14);c.fillText('Dajti ~1 613 m',X(n)-190,Y(v[n])-14)}
+addEventListener('resize',prof);matchMedia('(prefers-color-scheme:dark)').addEventListener('change',prof);
+setMode('fiz');prof();size();frame();
+</script></body></html>
